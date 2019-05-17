@@ -31,6 +31,7 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:${versions.glide}"
     implementation "com.github.bumptech.glide:recyclerview-integration:${versions.glide}"
     implementation "com.google.android.material:material:${versions.material}"
+    implementation "com.google.android.play:core:${versions.playCore}"
     implementation "com.google.code.gson:gson:${versions.gson}"
     implementation "com.google.dagger:dagger:${versions.dagger}"
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
