@@ -31,7 +31,7 @@ fun TextView.doBeforeTextChanged(
         after: Int
     ) -> Unit
 ) {
-    addTextChangedListener(beforeTextChanged = action)
+    addTextChangedListener(action, null, null)
 }
 
 /**
@@ -45,7 +45,7 @@ fun TextView.doOnTextChanged(
         after: Int
     ) -> Unit
 ) {
-    addTextChangedListener(onTextChanged = action)
+    addTextChangedListener(null, action, null)
 }
 
 /**
@@ -54,38 +54,44 @@ fun TextView.doOnTextChanged(
 fun TextView.doAfterTextChanged(
     action: (text: Editable?) -> Unit
 ) {
-    addTextChangedListener(afterTextChanged = action)
+    addTextChangedListener(null, null, action)
 }
 
 /**
  * Add a text changed listener to this TextView using the provided actions
  */
 fun TextView.addTextChangedListener(
-    beforeTextChanged: ((
+    beforeChanged: ((
         text: CharSequence?,
         start: Int,
         count: Int,
         after: Int
     ) -> Unit)? = null,
-    onTextChanged: ((
+    onChanged: ((
         text: CharSequence?,
         start: Int,
         count: Int,
         after: Int
     ) -> Unit)? = null,
-    afterTextChanged: ((text: Editable?) -> Unit)? = null
+    afterChanged: ((text: Editable?) -> Unit)? = null
 ) {
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
-            afterTextChanged?.invoke(s)
+            if (afterChanged != null) {
+                afterChanged(s)
+            }
         }
 
         override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
-            beforeTextChanged?.invoke(text, start, count, after)
+            if (beforeChanged != null) {
+                beforeChanged(text, start, count, after)
+            }
         }
 
         override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            onTextChanged?.invoke(text, start, before, count)
+            if (onChanged != null) {
+                onChanged(text, start, before, count)
+            }
         }
     })
 }

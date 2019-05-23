@@ -81,7 +81,7 @@ class StoriesRemoteDataSource(private val service: DesignerNewsService) {
                 return Result.Success(body)
             }
         }
-        return onError.invoke()
+        return onError()
     }
 
     companion object {
