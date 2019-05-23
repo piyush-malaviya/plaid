@@ -784,7 +784,7 @@ class HomeActivity : AppCompatActivity() {
         drawer.addDrawerListener(object : DrawerLayout.SimpleDrawerListener() {
 
             // if the user interacts with the filters while it's open then don't auto-close
-            private val filtersTouch = View.OnTouchListener { v, event ->
+            private val filtersTouch = View.OnTouchListener { _, _ ->
                 drawer.removeCallbacks(closeDrawerRunnable)
                 false
             }
